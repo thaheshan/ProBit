@@ -1,7 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
 import { ShoppingBag, Store, TrendingUp, MapPin, Clock, Shield, LogOut, Users, Award, Zap } from "lucide-react";
 import { useEffect } from "react";
@@ -42,9 +41,9 @@ export default function Home() {
             <ShoppingBag className="w-8 h-8 text-indigo-600" />
             <span className="text-2xl font-bold text-gray-900">LocalBid</span>
           </div>
-          <a href={getLoginUrl()}>
+          <Link href="/login">
             <Button className="bg-indigo-600 hover:bg-indigo-700">Sign In</Button>
-          </a>
+          </Link>
         </div>
       </nav>
 
@@ -59,11 +58,11 @@ export default function Home() {
               LocalBid is a hyperlocal marketplace where customers post product requests and local shops compete with their best prices. Support local businesses while saving money.
             </p>
             <div className="flex gap-4">
-              <a href={getLoginUrl()}>
+              <Link href="/signup">
                 <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700">
                   Get Started
                 </Button>
-              </a>
+              </Link>
               <Button size="lg" variant="outline">
                 Learn More
               </Button>
@@ -207,12 +206,12 @@ export default function Home() {
                   <span>Set your service radius (5-25 miles)</span>
                 </li>
               </ul>
-              <a href={getLoginUrl()}>
+              <Link href="/signup">
                 <Button size="lg" className="bg-green-600 hover:bg-green-700">
                   <Store className="w-4 h-4 mr-2" />
                   Register Your Shop
                 </Button>
-              </a>
+              </Link>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <h3 className="font-semibold text-lg mb-4">Shop Dashboard Preview</h3>
@@ -246,11 +245,11 @@ export default function Home() {
           <p className="text-lg mb-8 opacity-90">
             Start saving money or reach new customers today.
           </p>
-          <a href={getLoginUrl()}>
+          <Link href="/signup">
             <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
               Sign Up Now
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
 

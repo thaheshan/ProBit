@@ -28,6 +28,7 @@ export const users = mysqlTable(
     id: int("id").autoincrement().primaryKey(),
     openId: varchar("openId", { length: 64 }).notNull().unique(),
     email: varchar("email", { length: 320 }).notNull().unique(),
+    passwordHash: varchar("passwordHash", { length: 255 }),
     name: text("name"),
     phone: varchar("phone", { length: 20 }),
     accountType: mysqlEnum("accountType", ["customer", "shop", "admin"]).notNull(),

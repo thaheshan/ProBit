@@ -7,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Landing page
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 // Customer pages
 import CreateRequest from "./pages/CreateRequest";
@@ -29,6 +31,8 @@ function Router() {
     <Switch>
       {/* Landing */}
       <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Signup} />
       
       {/* Customer Routes */}
       <Route path="/customer/dashboard" component={CustomerDashboard} />

@@ -2,6 +2,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
+import { authRouter } from "./authRouter";
 import { 
   users, customerProfiles, shopProfiles, addresses, requests, bids, 
   orders, reviews, favoriteShops, notifications, messages, transactions,
@@ -572,35 +573,6 @@ const systemRouter = router({
     )
     .mutation(async ({ input }) => {
       // TODO: Implement owner notification
-      return { success: true };
-    }),
-});
-
-// ============================================================================
-// AUTH PROCEDURES
-// ============================================================================
-
-const authRouter = router({
-  me: publicProcedure.query((opts) => opts.ctx.user),
-
-  logout: publicProcedure.mutation(({ ctx }) => {
-    const cookieOptions = getSessionCookieOptions(ctx.req);
-    ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
-    return { success: true } as const;
-  }),
-
-  // Switch account type
-  switchAccountType: protectedProcedure
-    .input(z.object({ accountType: z.enum(["customer", "shop"]) }))
-    .mutation(async ({ ctx, input }) => {
-      const db = await getDb();
-      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-
-      await db
-        .update(users)
-        .set({ accountType: input.accountType })
-        .where(eq(users.id, ctx.user.id));
-
       return { success: true };
     }),
 });
