@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `analyticsSnapshots` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `shopId` int NOT NULL,\n  `date` timestamp NOT NULL,\n  `totalBids` int DEFAULT 0,\n  `wonBids` int DEFAULT 0,\n  `revenue` decimal(12,2) DEFAULT 0,\n  `averageBidPrice` decimal(10,2),\n  `winRate` decimal(5,2),\n  `topCategory` varchar(100),\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `analyticsSnapshots_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user RS9Chx9XE9DoShy.root --database MxhxxxEVDYnvnddhsRHzwY --execute CREATE TABLE IF NOT EXISTS `analyticsSnapshots` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `shopId` int NOT NULL,\n  `date` timestamp NOT NULL,\n  `totalBids` int DEFAULT 0,\n  `wonBids` int DEFAULT 0,\n  `revenue` decimal(12,2) DEFAULT 0,\n  `averageBidPrice` decimal(10,2),\n  `winRate` decimal(5,2),\n  `topCategory` varchar(100),\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `analyticsSnapshots_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 53
+}
