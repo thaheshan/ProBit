@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE users ADD COLUMN isVerified boolean DEFAULT false AFTER profileImage;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user RS9Chx9XE9DoShy.root --database MxhxxxEVDYnvnddhsRHzwY --execute ALTER TABLE users ADD COLUMN isVerified boolean DEFAULT false AFTER profileImage;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 423
+}

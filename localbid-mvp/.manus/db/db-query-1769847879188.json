@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `bids` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `requestId` int NOT NULL,\n  `shopId` int NOT NULL,\n  `price` decimal(10,2) NOT NULL,\n  `availability` enum('in_stock','can_order','limited') DEFAULT 'in_stock',\n  `deliveryAvailable` boolean DEFAULT false,\n  `deliveryPrice` decimal(10,2) DEFAULT 0,\n  `notes` text,\n  `photos` json,\n  `status` enum('active','accepted','rejected','withdrawn') DEFAULT 'active',\n  `submittedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `acceptedAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `bids_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway03.us-east-1.prod.aws.tidbcloud.com --port 4000 --user RS9Chx9XE9DoShy.root --database MxhxxxEVDYnvnddhsRHzwY --execute CREATE TABLE IF NOT EXISTS `bids` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `requestId` int NOT NULL,\n  `shopId` int NOT NULL,\n  `price` decimal(10,2) NOT NULL,\n  `availability` enum('in_stock','can_order','limited') DEFAULT 'in_stock',\n  `deliveryAvailable` boolean DEFAULT false,\n  `deliveryPrice` decimal(10,2) DEFAULT 0,\n  `notes` text,\n  `photos` json,\n  `status` enum('active','accepted','rejected','withdrawn') DEFAULT 'active',\n  `submittedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `acceptedAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `bids_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 327
+}
