@@ -1,7 +1,8 @@
 export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
-export const getLoginUrl = () => {
+// accountType: "customer" | "shop" - determines which account type to create on signup
+export const getLoginUrl = (accountType: "customer" | "shop" = "customer") => {
   const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL;
   const appId = import.meta.env.VITE_APP_ID;
   
@@ -22,7 +23,9 @@ export const getLoginUrl = () => {
   }
 
   const redirectUri = `${window.location.origin}/api/oauth/callback`;
-  const state = btoa(redirectUri);
+  // Encode both redirectUri and accountType in state
+  const stateData = JSON.stringify({ redirectUri, accountType });
+  const state = btoa(stateData);
 
   try {
     const url = new URL(`${oauthPortalUrl}/app-auth`);
