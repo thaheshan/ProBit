@@ -207,7 +207,7 @@ export default function Home() {
                   <span>Set your service radius (5-25 miles)</span>
                 </li>
               </ul>
-              <a href={getLoginUrl()}>
+              <a href="/shop/register">
                 <Button size="lg" className="bg-green-600 hover:bg-green-700">
                   <Store className="w-4 h-4 mr-2" />
                   Register Your Shop
