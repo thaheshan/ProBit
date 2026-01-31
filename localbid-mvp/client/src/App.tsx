@@ -19,6 +19,7 @@ import CustomerOrders from "./pages/customer/Orders";
 import CustomerShops from "./pages/customer/Shops";
 
 // Shop pages
+import ShopRegister from "./pages/ShopRegister";
 import ShopDashboard from "./pages/shop/Dashboard";
 import ShopSetupProfile from "./pages/shop/SetupProfile";
 import ShopFeed from "./pages/shop/Feed";
@@ -33,6 +34,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      
+      {/* Shop Register */}
+      <Route path="/shop/register" component={ShopRegister} />
       
       {/* Customer Routes */}
       <Route path="/customer/dashboard" component={CustomerDashboard} />

@@ -20,6 +20,24 @@ export function registerOAuthRoutes(app: Express) {
     }
 
     try {
+      // Decode state to get accountType
+      let accountType: "customer" | "shop" = "customer";
+      try {
+        const decodedState = Buffer.from(state, "base64").toString("utf-8");
+        // Try to parse as JSON (new format with accountType)
+        try {
+          const stateData = JSON.parse(decodedState);
+          if (stateData.accountType && (stateData.accountType === "customer" || stateData.accountType === "shop")) {
+            accountType = stateData.accountType;
+          }
+        } catch {
+          // If JSON parse fails, it's the old format (just a URL string)
+          // Keep default "customer" for backward compatibility
+        }
+      } catch {
+        // If base64 decode fails, use default "customer"
+      }
+
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
 
@@ -32,7 +50,7 @@ export function registerOAuthRoutes(app: Express) {
         openId: userInfo.openId,
         name: userInfo.name || null,
         email: userInfo.email || "",
-        accountType: "customer",
+        accountType: accountType,
         lastSignedIn: new Date(),
       });
 
@@ -44,7 +62,12 @@ export function registerOAuthRoutes(app: Express) {
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, "/");
+      // Redirect based on account type
+      if (accountType === "shop") {
+        res.redirect(302, "/shop/dashboard");
+      } else {
+        res.redirect(302, "/customer/dashboard");
+      }
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       res.status(500).json({ error: "OAuth callback failed" });
