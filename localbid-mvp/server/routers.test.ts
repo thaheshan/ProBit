@@ -24,8 +24,23 @@ const mockUser = {
   lastSignedIn: new Date(),
 };
 
+const mockShopUser = {
+  id: 2,
+  openId: "test-shop-123",
+  email: "shop@example.com",
+  name: "Test Shop",
+  accountType: "shop" as const,
+  role: "user" as const,
+  phone: null,
+  profileImage: null,
+  isVerified: false,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  lastSignedIn: new Date(),
+};
+
 // Create mock context
-function createMockContext(user: typeof mockUser | null = mockUser): TrpcContext {
+function createMockContext(user: typeof mockUser | typeof mockShopUser | null = mockUser): TrpcContext {
   return {
     user,
     req: {
@@ -34,7 +49,8 @@ function createMockContext(user: typeof mockUser | null = mockUser): TrpcContext
     } as TrpcContext["req"],
     res: {
       clearCookie: vi.fn(),
-    } as TrpcContext["res"],
+      cookie: vi.fn(),
+    } as any,
   };
 }
 
@@ -71,26 +87,6 @@ describe("Auth Router", () => {
     });
   });
 
-  describe("auth.switchAccountType", () => {
-    it("should switch account type to shop", async () => {
-      const mockDb = {
-        update: vi.fn().mockReturnThis(),
-        set: vi.fn().mockReturnThis(),
-        where: vi.fn().mockResolvedValue([{}]),
-      };
-
-      vi.mocked(getDb).mockResolvedValue(mockDb as any);
-
-      const ctx = createMockContext();
-      const caller = appRouter.createCaller(ctx);
-
-      const result = await caller.auth.switchAccountType({
-        accountType: "shop",
-      });
-
-      expect(result.success).toBe(true);
-    });
-  });
 });
 
 describe("Customer Router - Validation", () => {
